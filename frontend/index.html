@@ -1,12 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Page Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Email Validation</title>
 </head>
 <body>
+    <div class="container">
+        <h1>Email Validation</h1>
+        <input type="email" id="emailInput" placeholder="Enter your email address" />
+        <button onclick="checkEmail()">Check Email</button>
+        <div class="result" id="result"></div>
+        <div class="message" id="message"></div>
+        <div class="footer">
+            <a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a>
+        </div>
+        
+    </div>
 
-<h1>This is a Heading</h1>
-<p>This is a paragraph.</p>
+    <script>
+        function checkEmail() {
+            var email = document.getElementById("emailInput").value;
+            var result = document.getElementById("result");
+            var message = document.getElementById("message");
+            var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
+            if (emailRegex.test(email)) {
+
+                if (email === "test@domain.com") {
+                    result.innerHTML = '✅ Yes, the email is valid!';
+                    result.className = 'valid';
+                    message.innerHTML = "This email exists and is reachable.";
+                } else {
+                    result.innerHTML = '❌ No, the email is not valid!';
+                    result.className = 'invalid';
+                    message.innerHTML = "The email address doesn't exist or is incorrect.";
+                }
+            } else {
+                result.innerHTML = '❌ Invalid email format!';
+                result.className = 'invalid';
+                message.innerHTML = "Please enter a valid email address in the correct format.";
+            }
+        }
+    </script>
 </body>
 </html>
