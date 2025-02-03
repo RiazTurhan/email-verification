@@ -1,22 +1,24 @@
 import re
 import smtplib
 import dns.resolver
+from fastapi import FastAPI, HTTPException
 
-def is_valid_email(email):
+app = FastAPI()
+
+def is_valid_email(email: str) -> bool:
     pattern = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
-    return re.match(pattern, email)
+    return bool(re.match(pattern, email))
 
-def check_email_exists(email):
+@app.get("/check-email/")
+def check_email_exists(email: str):
     if not is_valid_email(email):
-        return "Invalid email format"
+        raise HTTPException(status_code=400, detail="Invalid email format")
     
     domain = email.split('@')[-1]
-
     try:
         mx_records = dns.resolver.resolve(domain, 'MX')
         mx_record = str(mx_records[0].exchange)
         
-
         server = smtplib.SMTP(mx_record)
         server.set_debuglevel(0) 
         server.helo()
@@ -25,13 +27,9 @@ def check_email_exists(email):
         server.quit()
 
         if code == 250:
-            return "Yes, the email address exists."
+            return {"status": "success", "message": "Yes, the email address exists."}
         else:
-            return "No, the email address does not exist."
+            return {"status": "failed", "message": "No, the email address does not exist."}
     
     except Exception as e:
-        return f"Error: {e}"
-
-
-email = input('Enter Your Email ')  
-print(check_email_exists(email))
+        raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
