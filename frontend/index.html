@@ -3,46 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
-    <title>Email Validation</title>
+    <title>Mail Purify</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="/Photo/Chocolate Minimalist Open Mail Logo Design.png" type="image/x-icon">
 </head>
 <body>
     <div class="container">
-        <h1>Email Validation</h1>
-        <input type="email" id="emailInput" placeholder="Enter your email address" />
-        <button onclick="checkEmail()">Check Email</button>
-        <div class="result" id="result"></div>
-        <div class="message" id="message"></div>
-        <div class="footer">
-            <a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a>
+
+        <!-- Header Section -->
+        <div class="header">
+            <div class="logo">
+                <img src="/Photo/Chocolate_Minimalist_Open_Mail_Logo_Design-removebg-preview.png" alt="">
+            </div>
+            <ul>
+                <li><a href="">Home</a></li>
+                <li><a href="">Guideline</a></li>
+                <li><a href="">About</a></li>
+            </ul>
         </div>
-        
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="left">
+                <img src="/Photo/WhatsApp_Image_2025-02-03_at_23.27.48_c23ceb52-removebg-preview.png" alt="">
+            </div>
+
+            <div class="right">
+                <div class="text">
+                    <h3>Welcome to...</h3>
+                    <h1>MailPurify</h1>
+                </div>
+
+                <div class="mail_sec">
+                    <h4>Verify Email Address In Real-Time</h4>
+                        
+                    <div class="mail">
+                        <input type="email" id="mail" placeholder="Enter email address">
+                        <div class="button">GO</div>
+                    </div>
+                </div>
+
+                <div class="ball">
+                    <div class="round"></div>
+                </div>
+
+                <p></p>
+            </div>
+        </section>
     </div>
 
-    <script>
-        function checkEmail() {
-            var email = document.getElementById("emailInput").value;
-            var result = document.getElementById("result");
-            var message = document.getElementById("message");
-            var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-            if (emailRegex.test(email)) {
-
-                if (email === "test@domain.com") {
-                    result.innerHTML = '✅ Yes, the email is valid!';
-                    result.className = 'valid';
-                    message.innerHTML = "This email exists and is reachable.";
-                } else {
-                    result.innerHTML = '❌ No, the email is not valid!';
-                    result.className = 'invalid';
-                    message.innerHTML = "The email address doesn't exist or is incorrect.";
-                }
-            } else {
-                result.innerHTML = '❌ Invalid email format!';
-                result.className = 'invalid';
-                message.innerHTML = "Please enter a valid email address in the correct format.";
-            }
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
